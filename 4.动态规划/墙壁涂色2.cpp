@@ -4,11 +4,10 @@ using namespace std;
 #define MAX_N 1000
 
 struct BigInt: public vector<int> {
-	BigInt(int x) {
+	BigInt(int x = 0) {
 		push_back(x);
 		normal();
 	}
-	
 	BigInt operator*(int x) {
 		BigInt ret(*this);
 		for (int i = 0; i < ret.size(); i++) ret[i] *= x; 
@@ -16,12 +15,13 @@ struct BigInt: public vector<int> {
 		return ret;
 	}
 	
-	BigInt opertor+(const BigInt &a) {
+	BigInt operator+(const BigInt &a) {
 		BigInt ret(*this);
 		for (int i = 0; i < a.size(); i++) {
 			if (i < ret.size()) ret[i] += a[i];
 			else ret.push_back(a[i]); 
 		}
+		ret.normal();
 		return ret;
 	}
 	
@@ -34,7 +34,6 @@ struct BigInt: public vector<int> {
 		}
 		return ;
 	}
-	
 };
 
 BigInt f[MAX_N + 5];
