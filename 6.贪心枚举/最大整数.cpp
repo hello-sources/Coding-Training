@@ -15,7 +15,7 @@ int n;
 string str[100005];
 
 bool cmp(string a, string b) {
-	return a + b > b + a; 
+	return a + b > b + a;//c++重载了加法这个运算方法 
 }
 
 int main() {
