@@ -46,7 +46,8 @@ int main() {
 	int n;
 	cin >> n; 
 	for (int i = 1; i <= n; i++) cin >> arr[i];
-	for (int i = 1; i <= n; i++) {
+	//反向建图
+    for (int i = 1; i <= n; i++) {
 		int cnt = 1, sum = arr[i];
 		if (i > 1) sum += arr[i - 1], cnt += 1;
 		if (i < n) sum += arr[i + 1], cnt += 1;
