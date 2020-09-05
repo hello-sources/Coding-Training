@@ -7,8 +7,8 @@
  ************************************************************************/
 
 #include <iostream>
-#include <algorithm>
 #include <cstring>
+#include <algorithm>
 using namespace std;
 #define MAX_N 70
 int a[MAX_N + 5];
