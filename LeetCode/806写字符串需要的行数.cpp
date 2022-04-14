@@ -18,3 +18,22 @@ int* numberOfLines(int* widths, int widthsSize, char * s, int* returnSize){
     *returnSize = 2;
     return ans;
 }
+
+/****************************C++****************************/
+class Solution {
+public:
+    vector<int> numberOfLines(vector<int>& widths, string s) {
+        int line = 1, cnt = 0;
+        for (int i = 0; i < s.size(); i++) {
+            if (cnt + widths[s[i] - 'a'] <= 100) cnt += widths[s[i] - 'a'];
+            else {
+                line++;
+                cnt = widths[s[i] - 'a'];
+            }
+        }
+        vector<int> ans;
+        ans.push_back(line);
+        ans.push_back(cnt);
+        return ans;
+    }
+};
