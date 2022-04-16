@@ -9,3 +9,15 @@ int maximumWealth(int** accounts, int accountsSize, int* accountsColSize){
     }
     return max;
 }
+
+/*************************************************/
+class Solution {
+public:
+    int maximumWealth(vector<vector<int>>& accounts) {
+        int ans = INT_MIN;
+        for (auto &x : accounts) {
+            ans = max(ans, accumulate(x.begin(), x.end(), 0));
+        }
+        return ans;
+    }
+};
