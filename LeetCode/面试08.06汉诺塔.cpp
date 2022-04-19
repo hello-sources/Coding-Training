@@ -55,3 +55,25 @@ void hanota(int* A, int ASize, int* B, int BSize, int** C, int* CSize){
     free(a->data);
     free(b->data);
 }
+
+
+/**************C++***********/
+class Solution {
+public:
+    void hanota(vector<int>& A, vector<int>& B, vector<int>& C) {
+        hanota_move(A.size(), A, B, C);
+        return ;
+    }
+
+    void hanota_move(int size, vector<int>& A, vector<int>& B, vector<int>& C) {
+        if (size == 1) {
+            C.emplace_back(A.back());
+            A.pop_back();
+            return ;
+        }
+        hanota_move(size - 1, A, C, B);
+        hanota_move(1, A, B, C);
+        hanota_move(size - 1, B, A, C);
+        return ;
+    }
+};
