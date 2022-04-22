@@ -29,3 +29,26 @@ int* shortestToChar(char * s, char c, int* returnSize){
     }
     return num;
 }
+
+/************************法二************************/
+class Solution {
+public:
+    vector<int> shortestToChar(string s, char c) {
+        int n = s.size();
+        vector<int> ans(n, n);
+        int ind = -1;
+        for (int i = 0; i < n; i++) {
+            if (ind != -1) ans[i] = i - ind;
+            if (s[i] == c) {
+                ind = i;
+                ans[i] = 0;
+            }
+        } 
+        ind = n;
+        for (int i = n - 1; i >= 0; i--) {
+            if (ind != n) ans[i] = min(ans[i], ind - i);
+            if (s[i] == c) ind = i;
+        }
+        return ans;
+    }
+};
