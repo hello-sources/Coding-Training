@@ -55,3 +55,51 @@ char * toGoatLatin(char * S){
     }
     return res;
 }
+
+
+
+
+/****************C++***************/
+class Solution {
+public:
+    bool judge(char ch) {
+        string temp = "aeiouAEIOU";
+        int flag = false;
+        for (auto c : temp) {
+            if (ch == c) {
+                flag = true;
+                break;
+            }
+        }
+        return flag;
+    }
+
+    string toGoatLatin(string sentence) {
+        string ans;
+        int cnt = count(sentence.begin(), sentence.end(), ' ');
+        vector<string> stor(cnt + 1);
+        int count = 0;
+        for (int i = 0; i < sentence.size(); i++) {
+            if (sentence[i] == ' ') {
+                count++;
+                continue;
+            }
+            stor[count].push_back(sentence[i]);
+        }
+        for (int i = 0; i < stor.size(); i++) {
+            if (judge(stor[i][0])) stor[i] += "ma";
+            else {
+                char ch = stor[i][0];
+                stor[i] = stor[i].substr(1);
+                stor[i] += ch;
+                stor[i] += "ma";
+            }
+            for (int j = 0; j <= i; j++) stor[i] += "a";
+        }
+        for (int i = 0; i < stor.size(); i++) {
+            ans += stor[i];
+            if (i < stor.size() - 1) ans += " ";
+        }
+        return ans;
+    }
+};
