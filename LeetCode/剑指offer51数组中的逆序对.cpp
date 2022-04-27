@@ -33,3 +33,53 @@ int reversePairs(int* nums, int numsSize){
     int *temp = (int *)malloc(sizeof(int) * numsSize);
     return merge_sort(0, numsSize - 1, nums, temp);
 }
+
+/*************************离散化树状数组****************************/
+class Solution {
+public:
+    int lowbit(int x) {
+        return x & (-x);
+    }
+
+    void update(int x, int size) {
+        while (x < size) {
+            C[x]++;
+            x += lowbit(x);
+        }
+        return ;
+    }
+
+    int query(int x, int size) {
+        int sum = 0;
+        while (x) {
+            sum += C[x];
+            x -= lowbit(x);
+        }
+        return sum;
+    }
+
+    void discretization(vector<int> &nums) {
+        a.assign(nums.begin(), nums.end());
+        sort(a.begin(), a.end());
+        return ;
+    }
+
+    int reversePairs(vector<int>& nums) {
+        int sum = 0, ans = 0;
+        int size = nums.size();
+        C.resize(size);
+        discretization(nums);
+        for (auto &num : nums) {
+            num = lower_bound(a.begin(), a.end(), num) - a.begin() + 1;
+        }
+        for (int i = size - 1; i >= 0; i--) {
+            ans += query(nums[i] - 1, size);
+            update(nums[i], size);
+        }
+        return ans;
+    }
+
+private :
+    vector<int> C;
+    vector<int> a;
+};
