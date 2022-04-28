@@ -79,3 +79,27 @@ void solutionFree(Solution* obj) {
     }
     return ;
 }
+
+/*******************unordered_map*********************/
+class Solution {
+public:
+    Solution(vector<int>& nums) {
+        for (int i = 0; i < nums.size(); i++) {
+            u_map[nums[i]].emplace_back(i);
+        }
+    }
+    
+    int pick(int target) {
+        auto cnt = u_map[target];
+        return cnt[rand() % cnt.size()];
+    }
+
+private :
+    unordered_map<int, vector<int>> u_map;
+};
+
+/**
+ * Your Solution object will be instantiated and called as such:
+ * Solution* obj = new Solution(nums);
+ * int param_1 = obj->pick(target);
+ */
