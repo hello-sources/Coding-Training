@@ -32,3 +32,28 @@ int** permute(int* nums, int numsSize, int* returnSize, int** returnColumnSizes)
     for(int i = 0; i < *returnSize; ++i) (*returnColumnSizes)[i] = numsSize;
     return res;
 }
+
+/**********************C++********************/
+class Solution {
+public:
+    void backtracking(vector<int> &nums, int ind, int size) {
+        if (ind == nums.size()) {
+            ans.emplace_back(nums);
+            return ;
+        }
+        for (int i = ind; i < size; i++) {
+            swap(nums[ind], nums[i]);
+            backtracking(nums, ind + 1, size);
+            swap(nums[ind], nums[i]);
+        }
+        return ;
+    }
+
+    vector<vector<int>> permute(vector<int>& nums) {
+        backtracking(nums, 0, nums.size());
+        return ans;
+    }
+
+private :
+    vector<vector<int>> ans;
+};
