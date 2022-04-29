@@ -38,3 +38,27 @@ public:
         return res;
     }
 };
+
+/*******************回溯***************************/
+class Solution {
+public:
+    void backtracking(vector<int> &nums, int ind) {
+        ans.emplace_back(temp);
+        if (ind >= nums.size()) return ;
+        for (int i = ind; i < nums.size(); i++) {
+            temp.emplace_back(nums[i]);
+            backtracking(nums, i + 1);
+            temp.pop_back();
+        }
+        return ;
+    }
+
+    vector<vector<int>> subsets(vector<int>& nums) {
+        backtracking(nums, 0);
+        return ans;
+    }
+
+private :
+    vector<vector<int>> ans;
+    vector<int> temp;
+};
