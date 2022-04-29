@@ -38,3 +38,28 @@ int** combine(int n, int k, int* returnSize, int** returnColumnSizes){
     }
     return res;
 }
+
+/********************C++******************/
+class Solution {
+public:
+    void backtracking(int n, int k, int ind) {
+        if (temp.size() == k) {
+            ans.emplace_back(temp);
+            return ;
+        }
+        for (int i = ind; i <= n; i++) {
+            temp.emplace_back(i);
+            backtracking(n, k, i + 1);
+            temp.pop_back();
+        }
+    }
+
+    vector<vector<int>> combine(int n, int k) {
+        backtracking(n, k, 1);
+        return ans;
+    }
+
+private :
+    vector<vector<int>> ans;
+    vector<int> temp;
+};
