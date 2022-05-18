@@ -13,3 +13,21 @@ bool isAlienSorted(char ** words, int wordsSize, char * order){
     }
     return true;
 }
+
+/***********************unordered_map*********************/
+class Solution {
+public:
+    bool isAlienSorted(vector<string>& words, string order) {
+        unordered_map<char, int> u_map;
+        for (int i = 0; i < order.size(); i++) u_map[order[i]] = i + 1;
+        for (int i = 0; i < words.size(); i++) {
+            for (int j = 0; j < words[i].size(); j++) {
+                words[i][j] = u_map[words[i][j]];
+            }
+        }
+        for (int i = 1; i < words.size(); i++) {
+            if (words[i] < words[i - 1]) return false;
+        }
+        return true;
+    }
+};
