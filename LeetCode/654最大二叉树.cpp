@@ -27,3 +27,24 @@ struct TreeNode* construct(int *nums, int l, int r) {
 struct TreeNode* constructMaximumBinaryTree(int* nums, int numsSize){
     return construct(nums, 0, numsSize);
 }
+
+
+/**C++*/
+class Solution {
+public:
+    TreeNode* calc(vector<int>& nums, int left, int right) {
+        if (left >= right) return nullptr;
+        int maxInd = left;
+        for (int i = left + 1; i < right; ++i) {
+            if (nums[i] > nums[maxInd]) maxInd = i;
+        }
+        TreeNode* node = new TreeNode(nums[maxInd]);
+        node->left = calc(nums, left, maxInd);
+        node->right = calc(nums, maxInd + 1, right);
+        return node;
+    }
+
+    TreeNode* constructMaximumBinaryTree(vector<int>& nums) {
+        return calc(nums, 0, nums.size());
+    }
+};
