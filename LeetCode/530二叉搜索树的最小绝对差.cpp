@@ -30,3 +30,27 @@ int getMinimumDifference(struct TreeNode* root){
     free(res);
     return min;
 }
+
+/**
+ * C++
+ */
+class Solution {
+public:
+    void inOrder(TreeNode* root, vector<int> &vec) {
+        if (root == nullptr) return ;
+        inOrder(root->left, vec);
+        vec.push_back(root->val);
+        inOrder(root->right, vec);
+        return ;
+    }
+
+    int getMinimumDifference(TreeNode* root) {
+        vector<int> vec;
+        inOrder(root, vec);
+        int ans = 100005;
+        for (int i = 1; i < vec.size(); i++) {
+            ans = min(ans, abs(vec[i] - vec[i - 1]));
+        }
+        return ans;
+    }
+};

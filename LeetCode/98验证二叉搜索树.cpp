@@ -36,3 +36,28 @@ bool isValidBST(struct TreeNode* root){
     }
     return true;
 }
+
+
+
+/**
+ * C++
+ */
+class Solution {
+public:
+    void inorder(TreeNode* root, vector<int> &vec) {
+        if (root == nullptr) return ;
+        inorder(root->left, vec);
+        vec.push_back(root->val);
+        inorder(root->right, vec);
+        return ;
+    }
+
+    bool isValidBST(TreeNode* root) {
+        vector<int> vec;
+        inorder(root, vec);
+        for (int i = 1; i < vec.size(); i++) {
+            if (vec[i] <= vec[i - 1]) return false;
+        }
+        return true;
+    }
+};

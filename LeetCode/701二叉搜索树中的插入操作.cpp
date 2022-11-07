@@ -35,3 +35,28 @@ struct TreeNode* insertIntoBST(struct TreeNode* root, int val){
     }
     return root;
 }
+
+
+/**
+ * C++迭代
+ */
+class Solution {
+public:
+    TreeNode* insertIntoBST(TreeNode* root, int val) {
+        if (root == nullptr) {
+            TreeNode* node = new TreeNode(val);
+            return node;
+        }
+        TreeNode* pre = root;
+        TreeNode* cur = root;
+        while (cur != nullptr) {
+            pre = cur;
+            if (cur->val > val) cur = cur->left;
+            else if (cur->val <= val) cur = cur->right;
+        }
+        TreeNode* node = new TreeNode(val);
+        if (val < pre->val) pre->left = node;
+        else pre->right = node;
+        return root;
+    }
+};

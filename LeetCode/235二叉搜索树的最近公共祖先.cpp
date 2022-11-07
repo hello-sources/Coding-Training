@@ -12,3 +12,19 @@ struct TreeNode* lowestCommonAncestor(struct TreeNode* root, struct TreeNode* p,
     if (root->val < p->val && root->val < q->val) return lowestCommonAncestor(root->right, p, q);
     return root;
 }
+
+/**
+ * C++迭代法
+ */
+
+class Solution {
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        while (root) {
+            if (root->val > p->val && root->val > q->val) root = root->left;
+            else if (root->val < p->val && root->val < q->val) root = root->right;
+            else return root;
+        }
+        return NULL;
+    }
+};

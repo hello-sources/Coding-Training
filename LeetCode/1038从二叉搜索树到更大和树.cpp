@@ -41,3 +41,24 @@ struct TreeNode* bstToGst(struct TreeNode* root){
     change(root);
     return root;
 }
+
+
+/**
+ * C++递归
+ */
+class Solution {
+public:
+    void calc(TreeNode* root, int *sum) {
+        if (root == nullptr) return ;
+        calc(root->right, sum);
+        *sum += root->val;
+        root->val = *sum;
+        calc(root->left, sum);
+    }
+
+    TreeNode* bstToGst(TreeNode* root) {
+        int sum = 0;
+        calc(root, &sum);
+        return root;
+    }
+};
